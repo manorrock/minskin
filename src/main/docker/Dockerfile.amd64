@@ -45,11 +45,11 @@ RUN cd /usr/local && \
 WORKDIR /usr/local/tomcat
 
 #
+# Copy Manorrock Minskin into Tomcat 9.
+#
+COPY target/minskin.war /usr/local/tomcat/webapps/ROOT.war
+
+#
 # Setup command to start Tomcat with console output.
 #
 CMD ["bin/catalina.sh", "run"]
-
-#
-# Copy Manorrock Siamese into Tomcat 9.
-#
-COPY target/minskin.war /usr/local/tomcat/webapps/ROOT.war

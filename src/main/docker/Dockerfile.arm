@@ -14,7 +14,7 @@ RUN ["cross-build-start"]
 #
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y curl gnupg2 gzip software-properties-common tar && \
+    apt-get install -y curl dnsutils gnupg2 gzip software-properties-common tar && \
     rm -rf /var/lib/apt/lists/*
 
 #
@@ -25,6 +25,11 @@ RUN cd /usr/local && \
     tar xfvz zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz && \
     mv zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf jdk && \
     rm zulu11.37.48-ca-jdk11.0.6-linux_aarch32hf.tar.gz
+
+#
+# Setup PATH
+#
+ENV PATH=$PATH:/usr/local/jdk/bin
 
 #
 # Install Tomcat 9.
@@ -38,11 +43,6 @@ RUN cd /usr/local && \
     rm -rf tomcat/webapps/*examples* && \
     rm -rf tomcat/webapps/*manager* && \
     rm -rf tomcat/webapps/ROOT*
-
-#
-# Setup PATH
-#
-ENV PATH=$PATH:/usr/local/jdk/bin
 
 #
 # Set work directory.
