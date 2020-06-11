@@ -34,3 +34,14 @@ jobs:
         VERSION=${TAG:${#INDEX}}
         docker build -f src/main/docker/Dockerfile.arm -t manorrock/minskin:arm-$VERSION .
         docker push manorrock/minskin:arm-$VERSION
+    - name: Push Docker manifest
+      run: |
+        export DOCKER_CLI_EXPERIMENTAL=enabled
+        docker manifest create manorrock/minskin:$VERSION \
+          manorrock/minskin:amd64-$VERSION \
+          manorrock/minskin:arm-$VERSION
+        docker manifest annotate manorrock/minskin:$VERSION \
+          manorrock/minskin:amd64-$VERSION --os linux --arch amd64
+        docker manifest annotate manorrock/minskin:$VERSION \
+          manorrock/minskin:arm-$VERSION --os linux --arch arm
+        docker manifest push manorrock/minskin:$VERSION

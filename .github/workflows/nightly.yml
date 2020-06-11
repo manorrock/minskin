@@ -27,3 +27,14 @@ jobs:
       run: |
         docker build -f src/main/docker/Dockerfile.arm -t manorrock/minskin:arm-snapshot .
         docker push manorrock/minskin:arm-snapshot
+    - name: Push Docker manifest
+      run: |
+        export DOCKER_CLI_EXPERIMENTAL=enabled
+        docker manifest create manorrock/minskin:snapshot \
+          manorrock/minskin:amd64-snapshot \
+          manorrock/minskin:arm-snapshot
+        docker manifest annotate manorrock/minskin:snapshot \
+          manorrock/minskin:amd64-snapshot --os linux --arch amd64
+        docker manifest annotate manorrock/minskin:snapshot \
+          manorrock/minskin:arm-snapshot --os linux --arch arm
+        docker manifest push manorrock/minskin:snapshot
