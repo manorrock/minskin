@@ -7,53 +7,15 @@
             http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.manorrock.minskin</groupId>
-    <artifactId>minskin</artifactId>
+    <artifactId>project</artifactId>
     <version>20.6.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>Manorrock Minskin</name>
+    <packaging>pom</packaging>
+    <name>Manorrock Minskin - Project</name>
     <organization>
         <name>Manorrock.com</name>
         <url>http://www.manorrock.com</url>
     </organization>
-    <build>
-        <finalName>minskin</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-    <dependencies>
-        <!-- Jakarta Faces -->
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>jakarta.faces</artifactId>
-            <version>2.3.14</version>
-            <scope>compile</scope>
-        </dependency>
-        <!-- JBoss Weld -->
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet-shaded</artifactId>
-            <version>3.1.4.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <!-- OmniFaces Oyena -->
-        <dependency>
-            <groupId>org.omnifaces.oyena</groupId>
-            <artifactId>oyena-action</artifactId>
-            <version>20.6.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
+    <modules>
+        <module>webapp</module>
+    </modules>
 </project>
