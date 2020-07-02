@@ -21,14 +21,17 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build amd64 image
       run: |
+        cd webapp
         docker build -f src/main/docker/Dockerfile.amd64 -t manorrock/minskin:amd64-snapshot .
         docker push manorrock/minskin:amd64-snapshot
     - name: Build arm image
       run: |
+        cd webapp
         docker build -f src/main/docker/Dockerfile.arm -t manorrock/minskin:arm-snapshot .
         docker push manorrock/minskin:arm-snapshot
     - name: Push Docker manifest
       run: |
+        cd webapp
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/minskin:snapshot \
           manorrock/minskin:amd64-snapshot \
