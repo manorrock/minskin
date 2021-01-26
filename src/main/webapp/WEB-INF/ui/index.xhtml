@@ -9,7 +9,6 @@
     <body>
         <ui:composition template="template.xhtml">
             <ui:define name="content">
-                <a href="#{request.contextPath}/ui/add">Add</a>
                 <h:dataTable value="#{indexController.nodes}" var="node">
                     <h:column>
                         <h:outputText value="#{node}"/>
