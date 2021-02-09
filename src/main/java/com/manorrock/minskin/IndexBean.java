@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2020 Manorrock.com. All Rights Reserved.
+ * Copyright (c) 2002-2021 Manorrock.com. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -32,31 +32,22 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
 /**
- * The controller for the /index page.
+ * The bean for the /index page.
  * 
  * @author Manfred Riem (mriem@manorrock.com)
  */
-@Named(value = "indexController")
+@Named(value = "indexBean")
 @RequestScoped
-public class IndexController {
+public class IndexBean {
     
     /**
      * Get the nodes.
      * 
      * @return the nodes.
      */
-    public List<String> getNodes() {
-        ArrayList<String> nodes = new ArrayList<>();
-        nodes.add("master");
-        return nodes;
-    }
-
-    /**
-     * Handle the /index request.
-     * 
-     * @return the index.xhtml page.
-     */
-    public String index() {
-        return "/WEB-INF/ui/index.xhtml";
+    public List<String> getInterfaces() {
+        ArrayList<String> interfaces = new ArrayList<>();
+        interfaces.add("eth0");
+        return interfaces;
     }
 }
