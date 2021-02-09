@@ -3,11 +3,30 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
     <body>
         <ui:composition template="../WEB-INF/template/template1.xhtml">
             <ui:define name="content">
                 Administration - Edit
+                <h:form>
+                    <table>
+                        <tr>
+                            <td>SSH username:</td>
+                            <td><h:inputText value="#{adminEditBean.sshUsername}"/></td>
+                        </tr>
+                        <tr>
+                            <td>SSH password:</td>
+                            <td><h:inputSecret value="#{adminEditBean.sshPassword}"/></td>
+                        </tr>
+                        <td align="right" colspan="2">
+                            <h:commandButton action="#{adminEditBean.save}"/>
+                        </td>
+                        <td colspan="2">
+                            <h:messages/>
+                        </td>
+                    </table>
+                </h:form>
             </ui:define>
         </ui:composition>
     </body>
