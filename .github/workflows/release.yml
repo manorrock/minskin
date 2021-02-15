@@ -22,32 +22,29 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build amd64 image
       run: |
-        cd webapp
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
-        VERSION=${TAG:${#INDEX}}
-        docker build -f src/main/docker/Dockerfile.amd64 -t manorrock/minskin:amd64-$VERSION .
+        VERSION=${TAG:${#INDEX}+1}
+        docker build -f Dockerfile.amd64 -t manorrock/minskin:amd64-$VERSION .
         docker push manorrock/minskin:amd64-$VERSION
-    - name: Build ARM32v6 image
+    - name: Build arm32v6 image
       run: |
-        cd webapp
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
-        VERSION=${TAG:${#INDEX}}
-        docker build -f src/main/docker/Dockerfile.arm -t manorrock/minskin:arm-$VERSION .
-        docker push manorrock/minskin:arm-$VERSION
+        VERSION=${TAG:${#INDEX}+1}
+        docker build -f Dockerfile.arm32v6 -t manorrock/minskin:arm32v6-$VERSION .
+        docker push manorrock/minskin:arm32v6-$VERSION
     - name: Push Docker manifest
       run: |
-        cd webapp
         TAG=${GITHUB_REF}
         INDEX=${TAG%v*}
-        VERSION=${TAG:${#INDEX}}
+        VERSION=${TAG:${#INDEX}+1}
         export DOCKER_CLI_EXPERIMENTAL=enabled
         docker manifest create manorrock/minskin:$VERSION \
           manorrock/minskin:amd64-$VERSION \
-          manorrock/minskin:arm-$VERSION
+          manorrock/minskin:arm32v6-$VERSION
         docker manifest annotate manorrock/minskin:$VERSION \
           manorrock/minskin:amd64-$VERSION --os linux --arch amd64
         docker manifest annotate manorrock/minskin:$VERSION \
-          manorrock/minskin:arm-$VERSION --os linux --arch arm
+          manorrock/minskin:arm32v6-$VERSION --os linux --arch arm
         docker manifest push manorrock/minskin:$VERSION

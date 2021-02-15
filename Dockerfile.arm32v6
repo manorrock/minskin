@@ -1,0 +1,2 @@
+FROM manorrock/tomcat:arm32v6-9
+COPY target/minskin.war /usr/local/tomcat/webapps/ROOT.war
